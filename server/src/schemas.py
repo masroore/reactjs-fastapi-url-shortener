@@ -18,4 +18,4 @@ class Url(UrlBase):
 class UrlInfo(UrlBase):
     clicks: int
     url: str
-    admin_url: str
+    delete_url: str
