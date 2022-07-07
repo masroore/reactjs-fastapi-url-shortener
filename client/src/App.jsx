@@ -30,13 +30,13 @@ function App() {
         if (isLoading) setShortUrl('')
     }, [isLoading])
 
-    const handleText = (text) => {
-        setTargetUrl(text)
+    const handleText = (url) => {
+        setShortUrl('')
+        setTargetUrl(url)
     }
 
-    const handleSubmit = (ev) => {
+    const handleSubmit = () => {
         if (isWebUri(targetUrl)) {
-            /* TODO: send API, */
             postUrl()
         }
     }
@@ -45,7 +45,6 @@ function App() {
         <Layout>
             <InputBox value={targetUrl} onChange={handleText} onSubmit={handleSubmit} />
             {shortUrl && <Preview target_url={targetUrl} short_url={shortUrl} />}
-            <p>{targetUrl}</p>
         </Layout>
     )
 }
