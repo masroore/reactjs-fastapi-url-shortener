@@ -7,11 +7,10 @@ function Copyright(props: any) {
     return (
         <Typography variant='body2' color='text.secondary' {...props}>
             {'Copyright © '}
-            <Link color='inherit' href='https://github.com/masroore/reactjs-fastapi-url-shortener/'>
+            <Link color='inherit' target='_blank' href='https://github.com/masroore/reactjs-fastapi-url-shortener/'>
                 Shorty
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
+            </Link>
+            {` ${new Date().getFullYear()}.`}
         </Typography>
     )
 }
@@ -27,8 +26,8 @@ export default function Footer(props: any) {
                     theme.palette.mode === 'light' ? theme.palette.grey[200] : theme.palette.grey[800],
             }}
         >
-            <Container maxWidth='sm'>
-                <Typography variant='body1'>Free URL Shortener</Typography>
+            <Container maxWidth='xl'>
+                <Typography variant='body2'>Simple URL Shortener</Typography>
                 <Copyright {...props} />
             </Container>
         </Box>
