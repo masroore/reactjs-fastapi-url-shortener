@@ -12,10 +12,10 @@ const Preview = ({ target_url, short_url }: Props) => {
     return (
         <>
             <CopyToClipboard text={short_url} onCopy={() => setCopied(true)}>
-                <span>{short_url}</span>
+                <span>Click to Copy: {short_url}</span>
             </CopyToClipboard>
             {copied ? <span style={{ color: 'red' }}>Copied.</span> : null}
-            {/* <TinyLink target_url={target_url} /> */}{' '}
+            <TinyLink target_url={target_url} />
         </>
     )
 }
