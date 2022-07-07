@@ -2,14 +2,14 @@ import secrets
 import string
 
 from sqlalchemy.orm import Session
-from sqlalchemy.sql import exists, delete
+from sqlalchemy.sql import exists
 
 from . import models, config
 
 
 def random_id(max_len: int = 5) -> str:
     return "".join(
-        secrets.choice(string.ascii_uppercase + string.digits) for _ in range(max_len)
+        secrets.choice(string.ascii_letters + string.digits) for _ in range(max_len)
     )
 
 
@@ -35,17 +35,22 @@ def short_id_exists(db: Session, short_id: str) -> bool:
     # return db.query(models.Url).filter(models.Url.short_id == short_id).count() > 0
 
 
-def delete_short_id(db: Session, short_id: str, secret: str) -> bool:
-    return db.query(
-        delete().where(models.Url.short_id == short_id, models.Url.secret == secret)
-    ).scalar()
-
-
-def update_clicks(db: Session, link: models.Url) -> models.Url:
-    link.clicks += 1
+def delete(db: Session, id: int):
+    db.query(models.Url).filter(models.Url.id == id).delete()
     db.commit()
-    db.refresh(link)
-    return link
+
+
+def find_by_secret(db: Session, short_id: str, secret: str) -> models.Url:
+    return (
+        db.query(models.Url)
+        .filter(models.Url.short_id == short_id, models.Url.secret == secret)
+        .first()
+    )
+
+
+def update_clicks(db: Session, link_id: int):
+    db.query(models.Url).filter_by(id=link_id).update({"clicks": models.Url.clicks + 1})
+    db.commit()
 
 
 def insert_url(db: Session, target_url: str) -> models.Url:

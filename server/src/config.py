@@ -4,13 +4,14 @@ from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
-    base_url: str = "http://localhost:9000/"
-    dsn: str = "sqlite:///./shorty.db"
-    short_id_length: int = 5
-    secret_length: int = 8
+    base_url: str
+    dsn: str
+    short_id_length: int
+    secret_length: int
 
     class Config:
-        env_file = "../.env"
+        env_file = ".env"
+        env_file_encoding = "utf-8"
 
 
 @lru_cache

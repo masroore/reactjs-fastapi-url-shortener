@@ -13,3 +13,9 @@ class Url(UrlBase):
 
     class Config:
         orm_mode = True
+
+
+class UrlInfo(UrlBase):
+    clicks: int
+    url: str
+    admin_url: str
